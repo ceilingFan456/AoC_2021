@@ -27,7 +27,7 @@ int return_bits(int n) {
   return a;
 }
 
-pair<int, long> unpack() {
+int unpack() {
   int version = return_bits(3);
   sum_ver += version;
   int type_id = return_bits(3);
@@ -39,10 +39,11 @@ pair<int, long> unpack() {
     do {
       cur = return_bits(5);
       bits_consumed += 5;
-      cur = cur > 15 ? cur - 16 : cur;
-
+      int a = cur > 15 ? cur - 16 : cur;
+      value = (value << 4) + a;
     } while(cur > 15); // 11111 - 10000 continue
 
+    cout << value << endl;
     return bits_consumed;
   } 
   int length_type = return_bits(1);
